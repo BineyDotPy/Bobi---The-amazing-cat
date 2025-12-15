@@ -26,7 +26,7 @@ class Player(pygame.sprite.Sprite):
         self.image = self.animations[self.direction][0]
         self.rect = self.image.get_rect(topleft=pos)
         
-        self.collision_rect = self.rect.inflate(-32, -32)
+        self.collision_rect = self.rect.inflate(-20, -30)
         self.collision_rect.x += 15
 
         self.normal_speed = 5
@@ -51,7 +51,9 @@ class Player(pygame.sprite.Sprite):
     def is_hidden(self, bushes):
         return any(bush.hide_zone.colliderect(self.collision_rect) for bush in bushes)
 
-
+    def draw_hitbox(self, surface):
+        #sprawdzanie hitboxów postaci
+        pygame.draw.rect(surface, (255, 0, 0), self.collision_rect, 2)
     def update(self, keys):
         move = False
 
@@ -87,8 +89,13 @@ class Player(pygame.sprite.Sprite):
         else:
             self.frame_index = 0
 
-        self.collision_rect = self.rect.inflate(-16, -16)  
+        #self.collision_rect = self.rect.inflate(-16, -16)
+        # zmniejszenie hitboxa
+        self.collision_rect = self.rect.inflate(-40, -40)  
         self.collision_rect.center = self.rect.center
+
+        #przesuniecie względem osi Y
+        self.collision_rect.y += 30
 
         
         # Blokowanie ruchu poza ekran

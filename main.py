@@ -121,6 +121,9 @@ while True:
         for _ in range(len(default_hit)):
             spawn_point(default_points, all_sprites, Default_Point)
 
+    #rysowanie hitboxa
+    player.draw_hitbox(screen)
+
     if player.points >= 20 and not pilka_bool:
         pilka = pilka((random.randint(100, SCREEN_WIDTH - 100), random.randint(100, SCREEN_HEIGHT - 100)))
         ball.add(pilka)
